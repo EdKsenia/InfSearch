@@ -47,6 +47,7 @@ for url in sites:
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     text = str(soup)
+    text = text.replace('&', '').replace('laquo', ' ').replace('raquo', ' ').replace('amp', ' ').replace('nbsp', ' ')
     sites_name.write(str(i) + ': ' + url + '\n')
     with open(file_name, "w", encoding="utf-8") as f:
         f.write(text)
