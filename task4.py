@@ -3,7 +3,6 @@ import pymorphy2
 import nltk
 from nltk.corpus import stopwords
 nltk.download('stopwords')
-import re
 import json
 import math
 
@@ -27,7 +26,7 @@ def preprocess(name):
         result += [temp]
     return result
 
-count = 3
+count = 101
 with open('test_words_count.txt', encoding="utf-8") as file:
     name = [row.strip() for row in file]
 # кол-во слов в кажлом файле
@@ -63,7 +62,6 @@ for i in range(1, count):
     result.append({})
     result_lemms.append({})
 
-
 for token in tokens:
     # в скольких текстах встречается
     words_doc = tokens[token][0]
@@ -83,10 +81,10 @@ for lemm in lemms:
                                   math.log(100/lemm_doc)]})
 
 for i in range(1,count):
-    with open('test_tokens_tf_idf_' + str(i) + '.txt', "w", encoding="utf-8") as f:
+    with open('tf_idf/test_tokens_tf_idf_' + str(i) + '.txt', "w", encoding="utf-8") as f:
         for key in result[i-1]:
             f.write(key + ' ' + str(result[i-1][key][1]) + ' ' + str(result[i-1][key][0]) + '\n')
-    with open('test_lemms_tf_idf_' + str(i) + '.txt', "w", encoding="utf-8") as f:
+    with open('tf_idf/test_lemms_tf_idf_' + str(i) + '.txt', "w", encoding="utf-8") as f:
         for key in result_lemms[i-1]:
             f.write(key + ' ' + str(result_lemms[i-1][key][1]) + ' ' + str(result_lemms[i-1][key][0]) + '\n')
 
