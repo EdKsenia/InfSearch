@@ -5,7 +5,7 @@ nltk.download('stopwords')
 import re
 import pymorphy2
 
-count = 3
+count = 101
 def preprocess(name):
     result = []
 
@@ -67,7 +67,16 @@ def create_tokens2():
 
 tokens,words_count = create_tokens2()
 
-# def tf_idf():
+with open('test_inverted_indexes.txt', "w", encoding="utf-8") as f:
+    for key in tokens:
+        f.write('{\"count\":' + str(len(tokens[key])) +
+                ',\"inverted_array\":' + str(tokens[key]) +
+                ',\"word\":\"' + str(key) + '\"}\n')
+
+with open('test_words_count.txt', "w", encoding="utf-8") as f:
+    for key in words_count:
+        f.write('{\"page\":' + str(key) + ',\"count\":' + str(words_count[key]) + '}\n')
+
 def create_lemms(tokens):
     lemms = {}
     lemms_stat = {}
@@ -104,13 +113,4 @@ with open('test_lemms_stat.txt', "w", encoding="utf-8") as f:
                 ',\"inverted_array\":' + str(lemms_statictic[key]) +
                 ',\"word\":\"' + str(key) + '\"}\n')
 
-with open('test_inverted_indexes.txt', "w", encoding="utf-8") as f:
-    for key in tokens:
-        f.write('{\"count\":' + str(len(tokens[key])) +
-                ',\"inverted_array\":' + str(tokens[key]) +
-                ',\"word\":\"' + str(key) + '\"}\n')
-
-with open('test_words_count.txt', "w", encoding="utf-8") as f:
-    for key in words_count:
-        f.write('{\"page\":' + str(key) + ',\"count\":' + str(words_count[key]) + '}\n')
 

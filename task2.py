@@ -30,9 +30,6 @@ def preprocess(name):
         result += [temp]
     return result
 
-# with open('site_1.txt', encoding="utf-8") as file:
-#     name = [row.strip() for row in file]
-
 dataset = []
 
 for i in range(1, 101):
